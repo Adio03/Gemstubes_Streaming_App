@@ -22,20 +22,23 @@ public class CloudServiceTest {
     private CloudService cloudService;
 
     @Test
-    public void uploadTest(){
-        Path path = Paths.get("C:\\Users\\mr Adio\\IdeaProjects\\gemstube\\src\\main\\resources\\assets\\codeBase.jpg");
-        try(var inputStream = Files.newInputStream(path);){
-            MultipartFile multipartFile = new MockMultipartFile("test-image",inputStream);
+    public void uploadTest() throws MediaCloudException {
 
-            String response = cloudService.upload(multipartFile);
+
+            String response = cloudService.upload(getTestFile());
             assertNotNull(response);
-        }catch (IOException | MediaCloudException exception){
+
+
+    }
+    public static MultipartFile getTestFile() {
+        Path path = Paths.get("C:\\Users\\mr Adio\\IdeaProjects\\gemstube\\src\\main\\resources\\assets\\codeBase.jpg");
+        try (var inputStream = Files.newInputStream(path);) {
+            MultipartFile multiPartFile = new MockMultipartFile("test-image", inputStream);
+            return multiPartFile;
+
+        } catch (IOException exception) {
             exception.printStackTrace();
-            log.error("ERROR:: ==> {}", exception.getMessage());
-            assertNotNull(exception);
+            throw new RuntimeException(exception);
         }
-
-
-
     }
 }

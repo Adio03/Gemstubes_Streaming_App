@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class UploadRequest {
     private Long creatorId;
     private MultipartFile multipartFile;
+    private String title;
 
     private String description;
 

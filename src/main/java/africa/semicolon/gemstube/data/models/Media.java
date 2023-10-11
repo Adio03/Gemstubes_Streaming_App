@@ -1,11 +1,14 @@
 package africa.semicolon.gemstube.data.models;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
-
+@Setter
+@Getter
+@Entity
 public class Media {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,5 +17,7 @@ public class Media {
     private String description;
 
     private String url;
+    @OneToOne(fetch = FetchType.EAGER)
+    private User uploader;
     private LocalDateTime createdAt;
 }
