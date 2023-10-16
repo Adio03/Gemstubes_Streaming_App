@@ -20,7 +20,10 @@ public class CloudServiceImpl implements CloudService{
     @Override
     public String upload(MultipartFile multipartFile) throws MediaCloudException {
         try{
-            Map<?,?> uploadResponse = cloudinary.uploader().upload(multipartFile.getBytes(),ObjectUtils.emptyMap());
+            Map<?,?> uploadResponse = cloudinary.uploader().upload(multipartFile.getBytes(),ObjectUtils.asMap(
+                    "resource_type","auto"
+
+            ));
             log.info("upload response ->{}", uploadResponse);
             String url = (String) uploadResponse.get("secure_url");
             return url;
@@ -29,4 +32,6 @@ public class CloudServiceImpl implements CloudService{
         }
 
     }
+
+
 }

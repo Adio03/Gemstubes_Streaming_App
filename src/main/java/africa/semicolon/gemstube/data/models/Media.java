@@ -13,15 +13,23 @@ public class Media {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String title;
+
     private String description;
 
     private String url;
+
     @OneToOne(fetch = FetchType.EAGER)
     private User uploader;
+
     private LocalDateTime createdAt;
 
-    @PrePersist
-    public void
+    @Enumerated(EnumType.STRING)
+    private Type type;
 
+    @PrePersist
+    public void setCreatedTime(){
+    this.createdAt = LocalDateTime.now();
+    }
 }
