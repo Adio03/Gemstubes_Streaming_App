@@ -1,5 +1,6 @@
 package africa.semicolon.gemstube.services;
 
+import africa.semicolon.gemstube.dtos.requests.RegisterRequest;
 import africa.semicolon.gemstube.dtos.requests.UploadRequest;
 import africa.semicolon.gemstube.dtos.responses.UploadResponse;
 import africa.semicolon.gemstube.exceptions.GemsTubeException;
@@ -17,9 +18,15 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class MediaServiceTest {
     @Autowired
     private MediaService mediaService;
+    @Autowired
+    private UserService userService;
 
     @Test
     public void uploadMediaTest() throws GemsTubeException {
+        RegisterRequest registerRequest = new RegisterRequest();
+        registerRequest.setEmail("test@email.com");
+        registerRequest.setPassword("12345678");
+        var registerResponse = userService.register(registerRequest);
         UploadRequest request = new UploadRequest();
         request.setCreatorId(1L);
         request.setTitle("The media test");

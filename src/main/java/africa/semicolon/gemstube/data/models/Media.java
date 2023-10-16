@@ -20,4 +20,8 @@ public class Media {
     @OneToOne(fetch = FetchType.EAGER)
     private User uploader;
     private LocalDateTime createdAt;
+
+    @PrePersist
+    public void
+
 }

@@ -23,9 +23,7 @@ public class CloudServiceTest {
 
     @Test
     public void uploadTest() throws MediaCloudException {
-
-
-            String response = cloudService.upload(getTestFile());
+        String response = cloudService.upload(getTestFile());
             assertNotNull(response);
 
 
